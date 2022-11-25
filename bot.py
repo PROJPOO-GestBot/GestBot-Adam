@@ -1,5 +1,5 @@
 import discord
-
+from user import * 
 
 
 bot = discord.Bot()
@@ -10,6 +10,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    print ("test")
+    user.lol()
 
 bot.run("MTA0MzA3ODk4MTA5MzY5NTUzOQ.GIEHVb.p_ktQhqcrRxa-ZcDYkbZtVs-_5V1s3tD1tcTes")
