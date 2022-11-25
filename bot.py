@@ -1,5 +1,5 @@
 import discord
-from user import * 
+from users import * 
 
 
 bot = discord.Bot()
@@ -10,6 +10,15 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    user.lol()
+    users.AddXP(1, message.author.id)
+
+
+@bot.slash_command(name = "level", description = "donne le niveaux du compte discord")
+async def level(ctx):
+    await ctx.send("test")
+
+@bot.slash_command(name = "laal", description = "donne le niveaux du compte discord")
+async def laal(ctx):
+    await ctx.send("test")
 
 bot.run("MTA0MzA3ODk4MTA5MzY5NTUzOQ.GIEHVb.p_ktQhqcrRxa-ZcDYkbZtVs-_5V1s3tD1tcTes")
