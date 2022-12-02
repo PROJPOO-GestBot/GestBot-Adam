@@ -1,9 +1,11 @@
-import discord
-
-class users ():
+class Susers():
+    
+    def __init__(self, bot):
+        self.bot = bot
     
     def AddXP(numberXP,userID):
         #requete SQL
+        print ("test")
         return 
     
     def LevelXP(userID):
@@ -13,3 +15,5 @@ class users ():
     def RemoveXP(numberXP, userID):
         # requete SQL
         return
+    def __str__(self):
+            return "users"
