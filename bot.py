@@ -15,10 +15,10 @@ async def on_message(message):
 
 @bot.slash_command(name = "level", description = "donne le niveaux du compte discord")
 async def level(ctx):
-    await ctx.send("test")
+    await ctx.send(users.LevelXP)
 
-@bot.slash_command(name = "laal", description = "donne le niveaux du compte discord")
-async def laal(ctx):
-    await ctx.send("test")
+@bot.slash_command(name = "supprimer", description = "supprime une certaine quantiter de XP")
+async def supttrimer(ctx, message):
+    await ctx.send(users.RemoveXP)
 
 bot.run("MTA0MzA3ODk4MTA5MzY5NTUzOQ.GIEHVb.p_ktQhqcrRxa-ZcDYkbZtVs-_5V1s3tD1tcTes")

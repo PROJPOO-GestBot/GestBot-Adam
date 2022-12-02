@@ -7,7 +7,8 @@ class users ():
         return 
     
     def LevelXP(userID):
-        return "userID"
+        #requete SQL
+        return
         
     def RemoveXP(numberXP, userID):
         # requete SQL
