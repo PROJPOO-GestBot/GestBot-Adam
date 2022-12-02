@@ -3,7 +3,7 @@ class Susers():
     def __init__(self, bot):
         self.bot = bot
         
-    def CalculLVL(lvl, xp):
+    def CalculLvl(lvl, xp):
         if (xp >= lvl *10):
             return True
         return False
@@ -14,10 +14,9 @@ class Susers():
     
     def AddXP(numberXP,userID):
         #requete SQL
-        print ("test")
         lvl = Susers.Level(userID)
         xpTotal = NotImplemented #requete SQL pour optenire le nombre total de XP
-        if Susers.CalculLVL(lvl, xpTotal):
+        if Susers.CalculLvl(lvl, xpTotal):
             NotImplemented # requete SQL pour augmenter le niveau de 1
         return 
         
