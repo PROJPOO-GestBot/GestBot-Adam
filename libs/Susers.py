@@ -1,5 +1,4 @@
 class Susers():
-    
     def __init__(self, bot):
         self.bot = bot
         
@@ -9,10 +8,12 @@ class Susers():
         return False
     
     def Level(userID):
+        print("niveau")
         NotImplemented
         return #requete SQL contenent le niveau
     
     def AddXP(numberXP,userID):
+        print("ajout XP")
         #requete SQL
         lvl = Susers.Level(userID)
         xpTotal = NotImplemented #requete SQL pour optenire le nombre total de XP
@@ -21,6 +22,7 @@ class Susers():
         return 
         
     def RemoveXP(numberXP, userID):
+        print ("supprimer XP")
         # requete SQL
         return
     
