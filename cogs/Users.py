@@ -12,7 +12,7 @@ class Users(discord.Cog):
 
     @discord.slash_command(name="level", description="donne le niveaux du compte discord")
     async def level(self, ctx):
-        await ctx.send(Susers.LevelXP)
+        await ctx.send(Susers.level("remplis"))
 
     @discord.slash_command(name="supprimer", description="supprime une certaine quantiter de XP")
     async def supprimer(self, ctx, message):
