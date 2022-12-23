@@ -1,15 +1,24 @@
+import os
+from SQL.DBconnector import Database
+
+
 class Susers():
 
     def __init__(self, bot):
         self.bot = bot
+        Database.__init__(
+            os.environ['SQL_USERNAME'],
+            os.environ['SQL_PASSWORD'],
+            os.environ['SQL_HOSTNAME'],
+        )
 
-    #calcul lvl return boolean value. Either change function name, or return type
+    # calcul lvl return boolean value. Either change function name, or return type
     def calcul_lvl(self, lvl, xp):
         if xp >= lvl * 10:
             return True
         return False
 
-    #function name must be an action. Level must be changed.
+    # function name must be an action. Level must be changed.
     def level(self, user_id):
         NotImplemented  # requete SQL contenent le niveau
 
