@@ -8,12 +8,13 @@ class Susers():
 
     def __init__(self, bot):
         self.bot = bot
+        """""
         self._db = Database(
             os.environ['SQL_USERNAME'],
-            os.environ['SQL_PASSWORD'],
+            os.environ['SQL_USER_PASSWORD'],
             os.environ['SQL_HOSTNAME'],
         )
-
+        """""
     # calcul lvl return boolean value. Either change function name, or return type
     def calcul_lvl(self, lvl, xp):
         if xp >= lvl * 10:
@@ -21,8 +22,8 @@ class Susers():
         return False
 
     # function name must be an action. Level must be changed.
-    def level(self, user_id = "blala"):
-        query = 'INSERT INTO `mydb`.`users`(`id`, `userId`) value(2, "troll")'
+    def level(self):
+        query = 'INSERT INTO `mydb`.`users`(`id`, `userId`) value(5, "sa fonctionne")'
         self._db.Modify(query=query)
         
         

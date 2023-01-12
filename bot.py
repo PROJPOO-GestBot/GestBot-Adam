@@ -16,5 +16,4 @@ for filename in os.listdir('./cogs'):
 async def on_ready():
     print(f"{bot.user} is ready and online!")
 
-
 bot.run(os.environ['BOT_TOKEN'])

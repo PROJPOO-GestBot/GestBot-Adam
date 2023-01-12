@@ -7,9 +7,9 @@ class Database():
         self.__db =  mysql.connector.connect(
             host = host,
             port = port,
-            user = user,
-            password = password,
-            database=dbName
+            user = "root",
+            password = "Pa$$w0rd",
+            database="bd-discord"
         )
 
     def Select(self, query:str) -> dict:
