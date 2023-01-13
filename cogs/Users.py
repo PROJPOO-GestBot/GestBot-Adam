@@ -23,12 +23,12 @@ class Users(discord.Cog):
         await Susers.AddXP(1, message.author.id)
 
     @discord.slash_command(name="level", description="donne le niveaux du compte discord")
-    async def level(self, ctx):
-        await ctx.send(Susers.level(self))
+    async def level(self,ctx):
+        await ctx.send(Susers.level(self, ctx.author.id))
 
     @discord.slash_command(name="supprimer", description="supprime une certaine quantiter de XP")
     async def supprimer(self, ctx, message):
-        await ctx.send(Susers.RemoveXP)
+        await ctx.send(Susers.remove_xp, message)
 
 
 def setup(bot):
