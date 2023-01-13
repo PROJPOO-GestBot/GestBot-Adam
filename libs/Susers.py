@@ -1,11 +1,11 @@
 import os
-from SQL.DBconnector import Database
+from SQL.DBConnector import Database
 
 from dotenv import load_dotenv
 load_dotenv()
 
 class Susers():
-
+    
     def __init__(self, bot):
         self.bot = bot
         """""
@@ -23,8 +23,9 @@ class Susers():
 
     # function name must be an action. Level must be changed.
     def level(self):
-        query = 'INSERT INTO `mydb`.`users`(`id`, `userId`) value(5, "sa fonctionne")'
+        query = 'INSERT INTO `mydb`.`users`(`id`, `userId`) value(9, "credOK")'
         self._db.Modify(query=query)
+        return "test"
         
         
         

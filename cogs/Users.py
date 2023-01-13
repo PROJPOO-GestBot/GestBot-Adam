@@ -1,7 +1,7 @@
 import os
 import discord
 from libs.Susers import Susers
-from SQL.DBconnector import Database
+from SQL.DBConnector import Database
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,7 +15,7 @@ class Users(discord.Cog):
         self._db = Database(
             os.environ['SQL_USERNAME'],
             os.environ['SQL_USER_PASSWORD'],
-            os.environ['SQL_HOSTNAME'],
+            os.environ['SQL_DB_NAME'],
         )
         
     @discord.Cog.listener()
