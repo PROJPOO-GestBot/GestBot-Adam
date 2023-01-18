@@ -30,6 +30,5 @@ class Users(discord.Cog):
     async def supprimer(self, ctx, message):
         await ctx.send(Susers.remove_xp, message)
 
-
 def setup(bot):
     bot.add_cog(Users(bot))

@@ -18,6 +18,11 @@ class Susers():
         """""
     # calcul lvl return boolean value. Either change function name, or return type
 
+    def send_message(value):
+        return "Vous avez: "+str(value[0][0]) +" XP et etes niveaux : "+ str(value[0][1])
+
+
+
     def calcul_lvl(self, lvl, xp):
         if xp >= lvl * 10:
             return True
@@ -25,14 +30,27 @@ class Susers():
 
     # function name must be an action. Level must be changed.
     def level(self, user_id):
-        #requete crée par ethann
-        query = '''SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor FROM Profils
-                    INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id
-                    INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id
-                    INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id
-                    INNER JOIN Server ON Server_has_Profils.Server_id = Server.id
-                    WHERE Server.serverId = 983809784753049611 AND Users.userId = 386200134628671492; '''
-        return self._db.Select(query=query)
+        print (user_id)
+        query = ("SELECT Profils.xp, Profils.level FROM Profils " + 
+                    "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " + 
+                    "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " + 
+                    "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " + 
+                    "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " + 
+                    "WHERE Server.serverId = 983809784753049611 AND Users.userId = "+ str(user_id) +";")
+        
+        return Susers.send_message(self._db.Select(query=query))
+
+    def profil():
+        # requete crée par ethann
+        print(user_id)
+        query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor FROM Profils"
+                 "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id"
+                 "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id"
+                 "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id"
+                 "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id"
+                 "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + str(user_id) + ";")
+
+
 
     def add_xp(self, number_xp, user_id):
         # requete SQL
