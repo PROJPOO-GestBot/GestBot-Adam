@@ -9,13 +9,13 @@ class Susers():
 
     def __init__(self, bot):
         self.bot = bot
-        """""
+        
         self._db = Database(
             os.environ['SQL_USERNAME'],
             os.environ['SQL_USER_PASSWORD'],
-            os.environ['SQL_HOSTNAME'],
+            os.environ['SQL_DB_NAME'],
         )
-        """""
+        
     # calcul lvl return boolean value. Either change function name, or return type
 
     def send_message(value):
@@ -51,18 +51,18 @@ class Susers():
 
 
     def AddXP(self, user_id):
-        query = ("SELECT profils.id, profils.xp FROM Profils " +
+        query = ("SELECT profils.id FROM Profils " +
                  "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
                  "INNER JOIN Server_has_Profils ON Profils.id=Server_has_Profils.Profils_id " +
                  "INNER JOIN Users ON Users_makes_Profils.Users_id=Users.id " +
                  "INNER JOIN Server ON Server_has_Profils.Server_id=Server.id " +
-                 "WHERE Server.serverId=983809784753049611 AND Users.userId=" + str(user_id) +" ;")
+                 "WHERE Server.serverId=983809784753049611 AND Users.userId= " + str(user_id) +";")
         
-        current_id_and_profils = self._db.Select(query=query)
+        current_id = self._db.Select(query=query)        
         
-        query = ("update profils " +
-                 "set xp= " + current_id_and_profils[0][0] + 
-                 " where id= "+ current_id_and_profils[0][1]+ ";")
+        query = ("UPDATE Profils " +
+                 "SET xp = xp + 1 " + 
+                 "WHERE id = "+ str(current_id[0][0])+ ";")
         
         
         lvl = Susers.level(user_id)
@@ -77,7 +77,7 @@ class Susers():
         # requete SQL
         return
 
-def wallpeper(self,user_id):
+def wallpaper(self,user_id):
     # requete crée par ethann
     query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor, Wallpapers.name FROM Profils " +
                 "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " +

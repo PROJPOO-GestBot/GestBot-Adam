@@ -20,7 +20,7 @@ class Users(discord.Cog):
         
     @discord.Cog.listener()
     async def on_message(self, message):
-        await Susers.AddXP(1, message.author.id)
+        await Susers.AddXP(self, message.author.id)
 
     @discord.slash_command(name="level", description="donne le niveaux du compte discord")
     async def level(self,ctx):
