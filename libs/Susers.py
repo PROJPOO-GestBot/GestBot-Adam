@@ -42,7 +42,6 @@ class Susers():
 
     def profil():
         # requete crée par ethann
-        print(user_id)
         query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor FROM Profils"
                  "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id"
                  "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id"
