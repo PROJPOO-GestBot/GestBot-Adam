@@ -50,26 +50,40 @@ class Susers():
                  "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + str(user_id) + ";")
 
 
-
-    def add_xp(self, number_xp, user_id):
-        # requete SQL
+    def AddXP(self, user_id):
+        query = ("SELECT profils.id, profils.xp FROM Profils " +
+                 "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
+                 "INNER JOIN Server_has_Profils ON Profils.id=Server_has_Profils.Profils_id " +
+                 "INNER JOIN Users ON Users_makes_Profils.Users_id=Users.id " +
+                 "INNER JOIN Server ON Server_has_Profils.Server_id=Server.id " +
+                 "WHERE Server.serverId=983809784753049611 AND Users.userId=" + str(user_id) +" ;")
+        
+        current_id_and_profils = self._db.Select(query=query)
+        
+        query = ("update profils " +
+                 "set xp= " + current_id_and_profils[0][0] + 
+                 " where id= "+ current_id_and_profils[0][1]+ ";")
+        
+        
         lvl = Susers.level(user_id)
         xp_total = NotImplemented  # requete SQL pour optenire le nombre total de XP
         if Susers.calcul_lvl(lvl, xp_total):
             NotImplemented  # requete SQL pour augmenter le niveau de 1
         return
 
+
+
     def remove_xp(self, number_xp, user_id):
         # requete SQL
         return
 
-def wallpeper(self):
+def wallpeper(self,user_id):
     # requete crée par ethann
-    query = '''SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor, Wallpapers.name FROM Profils 
-                INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id
-                INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id
-                INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id
-                INNER JOIN Server ON Server_has_Profils.Server_id = Server.id
-                INNER JOIN Wallpapers ON Profils.Wallpapers_id = Wallpapers.id
-                WHERE Server.serverId = 983809784753049611 AND Users.userId = 386200134628671492; '''
+    query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor, Wallpapers.name FROM Profils " +
+                "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " +
+                "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " +
+                "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " +
+                "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " +  
+                "INNER JOIN Wallpapers ON Profils.Wallpapers_id = Wallpapers.id " +
+                "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + user_id + ";")
     return self._db.Select(query=query)
