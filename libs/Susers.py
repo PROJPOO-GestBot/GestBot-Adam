@@ -16,10 +16,10 @@ class Susers():
             os.environ['SQL_DB_NAME'],
         )
         
-    # calcul lvl return boolean value. Either change function name, or return type
-
-    def send_message(value):
-        return "Vous avez: "+str(value[0][0]) +" XP et etes niveaux : "+ str(value[0][1])
+    def send_message_level(self,user_id):
+        xp_and_profil = Susers.level(self,user_id)
+        
+        return "Vous avex " + str(xp_and_profil[0][0]) + " et etes niveaux" + str(xp_and_profil[0][1])
 
 
 
@@ -38,7 +38,7 @@ class Susers():
                     "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " + 
                     "WHERE Server.serverId = 983809784753049611 AND Users.userId = "+ str(user_id) +";")
         
-        return Susers.send_message(self._db.Select(query=query))
+        return self._db.Select(query=query)
 
     def profil():
         # requete crée par ethann
@@ -62,13 +62,8 @@ class Susers():
         
         query = ("UPDATE Profils " +
                  "SET xp = xp + 1 " + 
-                 "WHERE id = "+ str(current_id[0][0])+ ";")
-        
-        
-        lvl = Susers.level(user_id)
-        xp_total = NotImplemented  # requete SQL pour optenire le nombre total de XP
-        if Susers.calcul_lvl(lvl, xp_total):
-            NotImplemented  # requete SQL pour augmenter le niveau de 1
+                 "WHERE id = "+ str(current_id[0][0])+";")
+        self._db.Modify(query=query)
         return
 
 

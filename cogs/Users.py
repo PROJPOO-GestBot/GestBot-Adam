@@ -20,11 +20,11 @@ class Users(discord.Cog):
         
     @discord.Cog.listener()
     async def on_message(self, message):
-        await Susers.AddXP(self, message.author.id)
+        Susers.AddXP(self, message.author.id)
 
     @discord.slash_command(name="level", description="donne le niveaux du compte discord")
     async def level(self,ctx):
-        await ctx.send(Susers.level(self, ctx.author.id))
+        await ctx.send(Susers.send_message_level(self, ctx.author.id))
 
     @discord.slash_command(name="supprimer", description="supprime une certaine quantiter de XP")
     async def supprimer(self, ctx, message):
