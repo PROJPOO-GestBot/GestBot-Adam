@@ -66,13 +66,4 @@ class Susers():
         # requete SQL
         return
 
-def wallpaper(self,user_id):
-    # requete crée par ethann
-    query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor, Wallpapers.name FROM Profils " +
-                "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " +
-                "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " +
-                "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " +
-                "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " +  
-                "INNER JOIN Wallpapers ON Profils.Wallpapers_id = Wallpapers.id " +
-                "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + user_id + ";")
-    return self._db.Select(query=query)
+
