@@ -27,7 +27,7 @@ class Wallpapers():
                 "WHERE Server.serverId=1042740561909653535 AND Users.userId=" + user_id + ";")
         return self._db.Select(query=query)
     
-    def wallpaper(self, user_id):
+    def wallpapers(self, user_id):
             # requete crée par ethann
         query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor, Wallpapers.name FROM Profils " +
                 "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " +
