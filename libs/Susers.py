@@ -21,13 +21,10 @@ class Susers():
         
         return "Vous avex " + str(xp_and_profil[0][0]) + " et etes niveaux" + str(xp_and_profil[0][1])
 
-
-
     def calcul_lvl(self, lvl, xp):
         if xp >= lvl * 10:
             return True
         return False
-
     # function name must be an action. Level must be changed.
     def level(self, user_id):
         print (user_id)
@@ -49,7 +46,6 @@ class Susers():
                  "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id"
                  "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + str(user_id) + ";")
 
-
     def AddXP(self, user_id):
         query = ("SELECT profils.id FROM Profils " +
                  "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
@@ -65,8 +61,6 @@ class Susers():
                  "WHERE id = "+ str(current_id[0][0])+";")
         self._db.Modify(query=query)
         return
-
-
 
     def remove_xp(self, number_xp, user_id):
         # requete SQL
