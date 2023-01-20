@@ -57,12 +57,25 @@ class Lusers():
     def remove_xp(self, number_xp, user_id):
         return
 
-    def add_users(self, user_id):
+    def check_user_existing(self, user_id, guild_id):
         query = ("SELECT * FROM gestbot.users " +
                  "WHERE userId="+ str(user_id) +";")
-        if self._db.select(query=query) == None:
-            NotADirectoryError
-            #crée profil pour new user
+        if self._db.select(query=query) == []:
+            query = ("insert into users (userID) " +
+                     "value("+ str(user_id) +");")
+            self._db.modify(query=query)
+        
+        query = ("SELECT serverId FROM gestbot.server " +
+                "WHERE serverId= "+ str(guild_id) +";")
+        if self._db.select(query=query) == []:
+            query = ("insert into server(serverId)" +
+                     "value("+ str(guild_id)+")")
+            self._db.modify(query=query)
+            query = ("INSERT INTO profils(profilId) " +
+                     "SELECT MAX(id)+1 FROM profils")
+            self._db.modify(query=query)
+            
+            
             
     def user_have_wallpapers(self,user_id, server_id):
             query = ("SELECT Wallpapers.name FROM Profils " +
