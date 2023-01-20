@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class Susers():
+class Users():
 
     def __init__(self, bot):
         self.bot = bot
@@ -15,82 +15,73 @@ class Susers():
             os.environ['SQL_USER_PASSWORD'],
             os.environ['SQL_DB_NAME'],
         )
-        
-    def send_message_level(self,user_id):
-        xp_and_profil = Susers.level(self,user_id)
-        
-        return "Vous avex " + str(xp_and_profil[0][0]) + " et etes niveaux" + str(xp_and_profil[0][1])
 
     def calcul_lvl(self, lvl, xp):
         if xp >= lvl * 10:
             return True
         return False
-    # function name must be an action. Level must be changed.
-    def level(self, user_id):
-        print (user_id)
+    
+    def level(self, user_id, server_id):
         query = ("SELECT Profils.xp, Profils.level FROM Profils " + 
-                    "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " + 
-                    "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " + 
-                    "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " + 
-                    "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " + 
-                    "WHERE Server.serverId = 983809784753049611 AND Users.userId = "+ str(user_id) +";")
+                "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " + 
+                "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " + 
+                "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " + 
+                "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " + 
+                "WHERE Server.serverId = " + str(server_id) + " AND Users.userId = "+ str(user_id) +";")
         
-        return self._db.Select(query=query)
+        return self._db.select(query=query)
 
-    def profil():
-        # requete crée par ethann
+    def get_profil(self, user_id, server_id):
         query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor FROM Profils"
                  "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id"
                  "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id"
                  "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id"
                  "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id"
-                 "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + str(user_id) + ";")
+                 "WHERE Server.serverId = " + str(server_id) + " AND Users.userId = " + str(user_id) + ";")
 
-    def AddXP(self, user_id):
+    def add_xp(self, user_id, server_id, xp=1):
         query = ("SELECT profils.id FROM Profils " +
                  "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
                  "INNER JOIN Server_has_Profils ON Profils.id=Server_has_Profils.Profils_id " +
                  "INNER JOIN Users ON Users_makes_Profils.Users_id=Users.id " +
                  "INNER JOIN Server ON Server_has_Profils.Server_id=Server.id " +
-                 "WHERE Server.serverId=983809784753049611 AND Users.userId= " + str(user_id) +";")
+                 "WHERE Server.serverId = " + str(server_id) + " AND Users.userId= " + str(user_id) +";")
         
-        current_id = self._db.Select(query=query)        
+        current_id = self._db.select(query=query)        
         
         query = ("UPDATE Profils " +
-                 "SET xp = xp + 1 " + 
+                 "SET xp = xp + " + str(xp) + 
                  "WHERE id = "+ str(current_id[0][0])+";")
-        self._db.Modify(query=query)
+        self._db.modify(query=query)
         return
 
     def remove_xp(self, number_xp, user_id):
-        # requete SQL
         return
 
     def add_users(self, user_id):
         query = ("SELECT * FROM gestbot.users " +
                  "WHERE userId="+ str(user_id) +";")
-        if self._db.Select(query=query) == None:
+        if self._db.select(query=query) == None:
             NotADirectoryError
             #crée profil pour new user
             
-    def user_have_wallpapers(self,user_id):
-            query= ("SELECT Wallpapers.name FROM Profils " +
+    def user_have_wallpapers(self,user_id, server_id):
+            query = ("SELECT Wallpapers.name FROM Profils " +
                     "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
                     "INNER JOIN Server_has_Profils ON Profils.id=Server_has_Profils.Profils_id" +
                     "INNER JOIN Users ON Users_makes_Profils.Users_id=Users.id " +
                     "INNER JOIN Server ON Server_has_Profils.Server_id=Server.id " +
                     "INNER JOIN Profils_has_Wallpapers ON Profils_has_Wallpapers.Profils_id=Profils.id " +
                     "INNER JOIN Wallpapers ON Wallpapers.id=Profils_has_Wallpapers.Wallpapers_id " + 
-                    "WHERE Server.serverId=1042740561909653535 AND Users.userId=" + user_id + ";")
-            return self._db.Select(query=query)
+                    "WHERE Server.serverId = " + str(server_id) + " AND Users.userId=" + user_id + ";")
+            return self._db.select(query=query)
         
-    def wallpapers(self, user_id):
-            # requete crée par ethann
+    def wallpapers(self, user_id, server_id):
         query = ("SELECT Profils.xp, Profils.level, Profils.nameColor, Profils.barColor, Wallpapers.name FROM Profils " +
-                    "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " +
-                    "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " +
-                    "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " +
-                    "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " +
-                    "INNER JOIN Wallpapers ON Profils.Wallpapers_id = Wallpapers.id " +
-                    "WHERE Server.serverId = 983809784753049611 AND Users.userId = " + user_id + ";")
-        return self._db.Select(query=query)
+                "INNER JOIN Users_makes_Profils ON Profils.id = Users_makes_Profils.Profils_id " +
+                "INNER JOIN Server_has_Profils ON Profils.id = Server_has_Profils.Profils_id " +
+                "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id " +
+                "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id " +
+                "INNER JOIN Wallpapers ON Profils.Wallpapers_id = Wallpapers.id " +
+                "WHERE Server.serverId = " + str(server_id) + " AND Users.userId = " + user_id + ";")
+        return self._db.select(query=query)
