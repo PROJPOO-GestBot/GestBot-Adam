@@ -68,7 +68,7 @@ class Susers():
 
     def add_users(self, user_id):
         query = ("SELECT * FROM gestbot.users " +
-                 "WHERE userId="+ user_id +";")
+                 "WHERE userId="+ str(user_id) +";")
         if self._db.Select(query=query) == None:
             NotADirectoryError
             #crée profil pour new user
