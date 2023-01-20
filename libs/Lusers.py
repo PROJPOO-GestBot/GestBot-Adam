@@ -5,11 +5,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-class Users():
+class Lusers():
 
-    def __init__(self, bot):
-        self.bot = bot
-        
+    def __init__(self):        
         self._db = Database(
             os.environ['SQL_USERNAME'],
             os.environ['SQL_USER_PASSWORD'],
