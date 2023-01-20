@@ -7,12 +7,13 @@ load_dotenv()
 
 class Lusers():
 
-    def __init__(self):        
+    def __init__(self, user_id):        
         self._db = Database(
             os.environ['SQL_USERNAME'],
             os.environ['SQL_USER_PASSWORD'],
             os.environ['SQL_DB_NAME'],
         )
+        self.__user_id = user_id
 
     def calcul_lvl(self, lvl, xp):
         if xp >= lvl * 10:

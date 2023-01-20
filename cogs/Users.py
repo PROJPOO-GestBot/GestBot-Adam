@@ -24,7 +24,8 @@ class Users(discord.Cog):
 
     @discord.slash_command(name="level", description="donne le niveaux du compte discord")
     async def level(self,ctx):
-        await ctx.send(Lusers.send_message_level(self, ctx.author.id))
+        xp_and_level = Lusers.level(self, ctx.author.id, ctx.guild.id)
+        await ctx.send(print("Vous avez : " + xp_and_level[0][0] + "Xp et etes niveaux : " + xp_and_level[0][1]))
 
     @discord.slash_command(name="supprimer", description="supprime une certaine quantiter de XP")
     async def supprimer(self, ctx, message):
