@@ -49,7 +49,7 @@ class Lusers():
         current_id = self._db.select(query=query)        
         
         query = ("UPDATE Profils " +
-                 "SET xp = xp + " + str(xp) + 
+                 "SET xp = xp + " + str(xp) + " " +
                  "WHERE id = "+ str(current_id[0][0])+";")
         self._db.modify(query=query)
         return
