@@ -46,11 +46,11 @@ class Lusers():
                  "INNER JOIN Server ON Server_has_Profils.Server_id=Server.id " +
                  "WHERE Server.serverId = " + str(server_id) + " AND Users.userId= " + str(user_id) +";")
         
-        current_id = self._db.select(query=query)        
+        current_id = self._db.select(query=query)[0][0]
         
         query = ("UPDATE Profils " +
                  "SET xp = xp + " + str(xp) + " " +
-                 "WHERE id = "+ str(current_id[0][0])+";")
+                 "WHERE id = "+ str(current_id)+";")
         self._db.modify(query=query)
         return
 
@@ -74,9 +74,7 @@ class Lusers():
             query = ("INSERT INTO profils(profilId) " +
                      "SELECT MAX(id)+1 FROM profils")
             self._db.modify(query=query)
-            
-            
-            
+             
     def user_have_wallpapers(self,user_id, server_id):
             query = ("SELECT Wallpapers.name FROM Profils " +
                     "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
