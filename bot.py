@@ -1,7 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
-from libs.Lusers import Users
+from libs.Lusers import Lusers
 
 load_dotenv()
 
