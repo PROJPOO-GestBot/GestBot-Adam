@@ -37,7 +37,8 @@ class Lusers():
                  "INNER JOIN Users ON Users_makes_Profils.Users_id = Users.id"
                  "INNER JOIN Server ON Server_has_Profils.Server_id = Server.id"
                  "WHERE Server.serverId = " + str(server_id) + " AND Users.userId = " + str(user_id) + ";")
-
+        return self._db.select(query=query)
+    
     def add_xp(self, user_id, server_id, xp=1):
         query = ("SELECT profils.id FROM Profils " +
                  "INNER JOIN Users_makes_Profils ON Profils.id=Users_makes_Profils.Profils_id " +
