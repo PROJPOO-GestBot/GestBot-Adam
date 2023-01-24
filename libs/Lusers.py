@@ -75,6 +75,8 @@ class Lusers():
             query = ("INSERT INTO profils(profilId) " +
                      "SELECT MAX(id)+1 FROM profils")
             self._db.modify(query=query)
+        
+        #todo inserer clé etranger
              
     def user_have_wallpapers(self,user_id, server_id):
             query = ("SELECT Wallpapers.name FROM Profils " +
