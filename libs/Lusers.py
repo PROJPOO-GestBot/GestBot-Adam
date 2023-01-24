@@ -72,6 +72,7 @@ class Lusers():
             query = ("insert into server(serverId)" +
                      "value("+ str(guild_id)+")")
             self._db.modify(query=query)
+            # if this is the first data it won't work
             query = ("INSERT INTO profils(profilId) " +
                      "SELECT MAX(id)+1 FROM profils")
             self._db.modify(query=query)
