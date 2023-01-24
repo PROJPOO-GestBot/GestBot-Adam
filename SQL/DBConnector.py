@@ -12,7 +12,7 @@ class Database():
             database= dbName
         )
 
-    def Select(self, query:str) -> dict:
+    def select(self, query:str) -> dict:
         """This method is designed to execute a SQL SELECT query.
 
         Args:
@@ -29,7 +29,7 @@ class Database():
 
         return result
 
-    def Modify(self, query:str) -> None:
+    def modify(self, query:str) -> None:
         """This method is designed to execute a SQL query (Insert or Update).
 
         Args:

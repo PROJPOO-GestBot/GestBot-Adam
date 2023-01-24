@@ -1,6 +1,6 @@
 import os
 import discord
-from libs.Susers import Susers
+from libs.Lusers import Lusers
 from SQL.DBConnector import Database
 
 from dotenv import load_dotenv
@@ -20,15 +20,17 @@ class Users(discord.Cog):
         
     @discord.Cog.listener()
     async def on_message(self, message):
-        Susers.AddXP(self, message.author.id)
+        Lusers.check_user_existing(self, message.author.id, message.guild.id)
+        Lusers.add_xp(self, message.author.id, message.guild.id)
 
     @discord.slash_command(name="level", description="donne le niveaux du compte discord")
     async def level(self,ctx):
-        await ctx.send(Susers.send_message_level(self, ctx.author.id))
+        xp_and_level = Lusers.level(self, ctx.author.id, ctx.guild.id)
+        await ctx.respond("Vous avez : " + str(xp_and_level[0][0]) + "Xp et etes niveaux : " + str(xp_and_level[0][1]))
 
     @discord.slash_command(name="supprimer", description="supprime une certaine quantiter de XP")
     async def supprimer(self, ctx, message):
-        await ctx.send(Susers.remove_xp, message)
+        await ctx.send(Lusers.remove_xp, message)
 
 def setup(bot):
     bot.add_cog(Users(bot))
