@@ -21,12 +21,12 @@ class Database():
         Returns:
             dict: A dict with the informations who were fetch on the database.
         """
-
         cursor = self.__db.cursor()
         cursor.execute(query)
 
         result = cursor.fetchall()
-
+        
+        self.__db.commit()
         return result
 
     def modify(self, query:str) -> None:
